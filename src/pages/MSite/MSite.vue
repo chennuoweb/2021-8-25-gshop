@@ -36,6 +36,7 @@
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
+      <img v-else src="./images/msite_back.svg" alt="back">
     </nav>
     <!--首页附近商家-->
     <div class="msite_shop_list">
@@ -106,6 +107,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("reqFoodCategorys");
+    this.$store.dispatch('reqShops');
   },
 };
 </script>

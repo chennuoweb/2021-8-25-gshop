@@ -8,6 +8,7 @@ import {
 } from './mutation-types';
 
 export default {
+  // ES6的计算属性名
   [RECEIVE_ADDRESS] (state, {address}) {
     state.address = address;
   },
