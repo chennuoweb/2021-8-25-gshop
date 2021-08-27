@@ -11,109 +11,28 @@
     </HeaderTop>
     <!--首页导航-->
     <nav class="msite_nav">
-      <div class="swiper-container">
-        <swiper class="swiper-wrapper" :options="swiperOptions">
-          <swiper-slide class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/1.jpg" />
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/2.jpg" />
-              </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/3.jpg" />
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/4.jpg" />
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/5.jpg" />
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/6.jpg" />
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/7.jpg" />
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/8.jpg" />
-              </div>
-              <span>土豪推荐</span>
-            </a>
-          </swiper-slide>
-          <swiper-slide class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/9.jpg" />
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
+      <!-- swiper的容器div -->
+      <div class="swiper-container" v-if="categorys.length">
+        <!-- swiper的包裹层div -->
+        <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrapper">
+          <!-- swiper的轮播div -->
+          <swiper-slide
+            class="swiper-slide"
+            v-for="(categorys, index) in categorysArr"
+            :key="index"
+          >
+            <a
+              href="javascript:"
+              class="link_to_food"
+              v-for="(category, index) in categorys"
+              :key="index"
+            >
               <div class="food_container">
                 <img src="./images/nav/10.jpg" />
               </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/11.jpg" />
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/12.jpg" />
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/13.jpg" />
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/14.jpg" />
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/1.jpg" />
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/2.jpg" />
-              </div>
-              <span>土豪推荐</span>
+              <span>{{ category.title }}</span>
             </a>
           </swiper-slide>
-          <!-- Add Pagination -->
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
@@ -130,27 +49,63 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 import HeaderTop from "../../components/HeaderTop/HeaderTop.vue";
 import ShopList from "../../components/ShopList/ShopList.vue";
+// 引入插件
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+import "swiper/dist/css/swiper.css";
 export default {
   data() {
     return {
-      swiperOptions: {
-        pagination: ".swiper-pagination",
+      baseImageUrl: "./images/nav/",
+      swiperOption: {
+        notNextTick: true,
         loop: true,
-        autoplay: 2500,
-        effect: "fade",
-        autoplayDisableOnInteraction: false,
+        // effect : 'cube',
+        autoplay: {
+          delay: 3000,
+          stopOnLastSlide: false,
+          disableOnInteraction: false
+        },
+        // 显示分页
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true //允许分页点击跳转
+        },
       },
     };
   },
   components: {
     HeaderTop,
     ShopList,
+    swiper,
+    swiperSlide,
   },
   computed: {
-    ...mapState(["address"]),
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    },
+    ...mapState(["address", "categorys"]),
+
+    categorysArr() {
+      const { categorys } = this;
+      const arr = [];
+      let minArr = [];
+      categorys.forEach((c) => {
+        if (minArr.length === 8) {
+          minArr = [];
+        }
+        if (minArr.length === 0) {
+          arr.push(minArr);
+        }
+        minArr.push(c);
+      });
+      return arr;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("reqFoodCategorys");
   },
 };
 </script>
