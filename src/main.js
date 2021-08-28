@@ -2,6 +2,10 @@ import Vue from 'vue';
 import App from "./App.vue";
 import router from './router/index';
 import store from './store';
+import {Button} from 'mint-ui';
+
+// 注册全局组件标签
+Vue.component(Button.name, Button);
 
 import '../static/css/reset.css'
 // 关闭生产提示

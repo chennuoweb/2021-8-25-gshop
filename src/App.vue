@@ -14,11 +14,12 @@ export default {
     FooterGuide,
   },
   methods: {
-    ...mapActions(["getAddress"]),
+    ...mapActions(["getAddress", "getUserInfo"]),
   },
   mounted() {
     // this.$store.dispatch('getAddress');
     this.getAddress();
+    this.getUserInfo();
   },
 };
 </script>
