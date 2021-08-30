@@ -45,3 +45,9 @@ a {
 	text-decoration:none
 }
 * { touch-action: pan-y; }
+
+span { 
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap; 
+}

@@ -5,7 +5,7 @@
         <i class="iconfont icon-arrow-left icon-arrow_left"></i>
       </a>
     </nav>
-    <div class="shop-content">
+    <div class="shop-content" @click="toggleShopShow">
       <img class="content-image" :src="info.avatar">
       <div class="header-content">
         <h2 class="content-title">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <!-- 三层表达式容易出问题，v-if验证数据是否已接受 -->
-    <!-- <div class="shop-header-discounts" v-if="info.supports" @click="toggleSupportShow">
+    <div class="shop-header-discounts" v-if="info.supports" @click="toggleSupportShow">
       <div class="discounts-left">
         <div class="activity" :class="supportClasses[info.supports[0].type]">
           <span class="content-tag">
@@ -39,9 +39,9 @@
       <div class="discounts-right">
       {{info.supports.length}}个优惠
       </div>
-    </div> -->
+    </div>
     <transition name="fade">
-      <!-- <div class="shop-brief-modal" v-show="shopShow">
+      <div class="shop-brief-modal" v-show="shopShow">
         <div class="brief-modal-content">
           <h2 class="content-title">
             <span class="content-tag">
@@ -82,10 +82,10 @@
           </div>
         </div>
         <div class="brief-modal-cover"></div>
-      </div> -->
+      </div>
     </transition>
     <transition name="fade">
-      <!-- <div class="activity-sheet"  v-show="supportShow">
+      <div class="activity-sheet"  v-show="supportShow">
         <div class="activity-sheet-content">
           <h2 class="activity-sheet-title">优惠活动</h2>
           <ul class="list">
@@ -101,7 +101,7 @@
           </div>
         </div>
         <div class="activity-sheet-cover"></div>
-      </div> -->
+      </div>
     </transition>
   </div>
 </template>
@@ -109,8 +109,24 @@
 <script>
 import {mapState} from 'vuex';
 export default {
+  data() {
+    return {
+      supportClasses: ['activity-green', 'activity-red', 'activity-orange'],
+      shopShow: false,
+      supportShow: false
+    }
+  },
   computed: {
     ...mapState(['info']),
+  },
+  methods: {
+    toggleShopShow () {
+      this.shopShow =  !this.shopShow;
+    },
+
+    toggleSupportShow() {
+      this.supportShow = !this.supportShow;
+    }
   }
 }
 </script>
