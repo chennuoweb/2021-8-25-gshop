@@ -9,3 +9,5 @@ export const RESET_USER_INFO = 'reset_user_Info';       // 重置用户信息
 export const RECEIVE_GOODS = 'receive_goods';       // 重置用户信息
 export const RECEIVE_RATINGS = 'receive_ratings';       // 重置用户信息
 export const RECEIVE_INFO = 'receive_info';       // 重置用户信息
+export const INCREMENT_FOOD_COUNT = 'increment_food_count';       // 增加
+export const DECREMENT_FOOD_COUNT = 'crement_food_countde';       // 减少

@@ -1,3 +1,4 @@
+
 /**
  * 通过mutation间接更新state的多个方法的对象
  */
@@ -10,6 +11,8 @@ import {
   RECEIVE_GOODS,
   RECEIVE_RATINGS,
   RECEIVE_INFO,
+  INCREMENT_FOOD_COUNT,
+  DECREMENT_FOOD_COUNT,
 } from './mutation-types';
 
 import {
@@ -106,4 +109,13 @@ export default {
       commit(RECEIVE_INFO, {info})
     }
   },
+
+  // 同步更新food中的count值
+  updateFoodCount({commit}, {isAdd, food}) {
+    if(isAdd) {
+      commit(INCREMENT_FOOD_COUNT, {food});
+    } else {
+      commit(DECREMENT_FOOD_COUNT, {food})
+    }
+  }
 }
