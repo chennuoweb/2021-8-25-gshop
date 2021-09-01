@@ -26,8 +26,10 @@ export default new VueRouter({
     {
       path: '/msite',
       component: MSite,
+      // 此时的Msite等都是返回路由组件的函数，只有请求对应的路由路径时(第一次)才会执行此函数并加载路由组件
+      // 标识此路由是否显示FooterGuide
       meta: {
-        
+        showFooter: true
       }
     },
     {

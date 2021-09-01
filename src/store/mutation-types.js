@@ -11,3 +11,4 @@ export const RECEIVE_RATINGS = 'receive_ratings';       // 重置用户信息
 export const RECEIVE_INFO = 'receive_info';       // 重置用户信息
 export const INCREMENT_FOOD_COUNT = 'increment_food_count';       // 增加
 export const DECREMENT_FOOD_COUNT = 'crement_food_countde';       // 减少
+export const CLEAR_CART = 'clear_cart';           // 清空购物车
