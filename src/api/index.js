@@ -26,7 +26,7 @@ export const reqUserInfo = () => ajax(BASE_URL + '/userinfo');
 export const reqLogout = () => ajax(BASE_URL + '/logout');
 
 // 9 根据经纬度和关键字获取商铺列表
-export const reqSearchShop = (geohash, keyword) => ajax(BASE_URL + '/searcch_shops', {geohash, keyword});
+export const reqSearchShop = (geohash, keyword) => ajax(BASE_URL + '/search_shops', {geohash, keyword});
 
 // 10 获取商家信息
 export const reqShopInfo = () => ajax('/info');

@@ -89,27 +89,7 @@
                   >{{ item }}</span
                 >
               </div>
-              <div class="time">{{ rating.rateTime }}</div>
-            </div>
-          </li>
-          <li class="rating-item">
-            <div class="avatar">
-              <img
-                width="28"
-                height="28"
-                src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
-              />
-            </div>
-            <div class="content">
-              <h1 class="name">aa</h1>
-              <div class="star-wrapper">
-                <Star :score="4" :size="24" /> <span class="delivery">30</span>
-              </div>
-              <p class="text">不错</p>
-              <div class="recommend">
-                <span class="iconfont icon-thumb_down"></span>
-              </div>
-              <div class="time">2016-07-23 21:52:44</div>
+              <div class="time">{{ rating.rateTime | date-format}}</div>
             </div>
           </li>
         </ul>

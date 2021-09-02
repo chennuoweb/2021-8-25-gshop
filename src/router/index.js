@@ -3,10 +3,17 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 组件
-import MSite from '../pages/MSite/MSite.vue';
-import Order from '../pages/Order/Order.vue';
-import Profile from '../pages/Profile/Profile.vue';
-import Search from '../pages/Search/Search.vue';
+// import MSite from '../pages/MSite/MSite.vue';
+// import Order from '../pages/Order/Order.vue';
+// import Profile from '../pages/Profile/Profile.vue';
+// import Search from '../pages/Search/Search.vue';
+
+// 按条件加载路由
+const MSite = () => import('../pages/MSite/MSite.vue');
+const Order = () => import('../pages/Order/Order.vue');
+const Profile = () => import('../pages/Profile/Profile.vue');
+const Search = () => import('../pages/Search/Search.vue');
+
 import Login from '../pages/Login/Login.vue';
 import Shop from '../pages/Shop/Shop.vue';
 import ShopRatings from '../pages/Shop/ShopRatings/ShopRatings.vue';
@@ -24,6 +31,10 @@ export default new VueRouter({
   // 所有路由
   routes:[
     {
+      path: '/',
+      redirect: '/msite'
+    },
+    {
       path: '/msite',
       component: MSite,
       // 此时的Msite等都是返回路由组件的函数，只有请求对应的路由路径时(第一次)才会执行此函数并加载路由组件
@@ -33,24 +44,29 @@ export default new VueRouter({
       }
     },
     {
+      path: '/search',
+      component: Search,
+      meta: {
+        showFooter: true
+      }
+    },
+    {
       path: '/order',
-      component: Order
+      component: Order,
+      meta: {
+        showFooter: true
+      }
     },
     {
       path: '/profile',
       component: Profile,
-    },
-    {
-      path: '/search',
-      component: Search
+      meta: {
+        showFooter: true
+      }
     },
     {
       path: '/login',
       component: Login
-    },
-    {
-      path: '/',
-      redirect: '/msite'
     },
     {
       path: '/shop',
